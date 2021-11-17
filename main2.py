@@ -1,6 +1,6 @@
 from flask import Flask, request, Response
 from flask.config import Config
-from flask_alchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy
 from config import Config
 import json
 
@@ -27,10 +27,10 @@ def world():
 @app.route("/movie")
 def get_movies():
     # RETRIEVE ALL MOVIES FROM TABLE MOVIES
-    movies = Movies.query.all()
+    movies = Movies.query.all() 
     html_response = "<ul>"
     for m in movies:
-        html_response += "<li>" + "<a href+' /movie/'" + m.id + ">" + movie_db[m] ["name"] + "</a>" + "</li>"
+        html_response += "<li>" + "<a href+' /movie/'" + str(m.id) + ">" + movie_db[m] ["name"] + "</a>" + "</li>"
         html_response += "</ul>"
     return html_response
     
@@ -51,6 +51,7 @@ def add_movie(): #add_movies*** #changed_movies_to_movie
 # READ 
 @app.route("/<movie_id>")
 def get_movie(movie_id):
+    movie = Movies.query.get(movie_id) # SELECT
     return json.dumps(movie_db[movie_id])
 
 if __name__ == "__main__":

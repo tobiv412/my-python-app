@@ -12,7 +12,7 @@ animal_management = {
 
 @app.route("/")
 def Zoo():
-    return "Victor's Zoo"
+    return "Victor's Zoo is a great place"
 
 @app.route("/animals")
 def animals():
